@@ -1,0 +1,66 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>RegExp3</title>
+</head>
+<body>
+<div class="fidback">
+	<form action="#">
+		<fieldset>
+			<input id="name" type="text" placeholder="Name">
+			<br>
+			<br>
+			<input id="tel" type="tel" placeholder="+7(000)000-0000" >
+			<br>
+			<br>
+			<input id="mail" type="email" placeholder="@mail.ru">
+			<br>
+			<br>
+			<textarea id="text" cols="50" rows="4" placeholder="Текстовое поле" maxlength="200"></textarea>
+			<br>
+			<br>
+			<input type="submit" value="Отправить">
+		</fieldset>
+	</form>
+</div>
+</body>
+<script>
+
+	/**
+	 * При нажатии на кнопку «Отправить» будет проведена валидация.
+	 */
+	document.querySelector('input[type="submit"]').addEventListener('click', function (){
+		var $name = document.querySelector('#name');
+		var $tel = document.querySelector('#tel');
+		var $mail = document.querySelector('#mail');
+		var $text = document.querySelector('#text');
+
+		var nameRE = /^(([a-z]{1,20})|([а-яё]{1,20}))$/i;
+		var telRE = /^\+\d\(\d{3}\)\d{3}\-\d{4}$/;
+		var mailRE = /^\w+@mail\.ru$|^(\w+\.\w+)@mail\.ru$|^(\w+\-\w+)@mail\.ru$/;
+		var textRE = /\w+/i;
+
+		/**
+		 *  Валидация. Если валидация не пройдена, граница невалидного поля окрасится в красный цвет, а так же появится
+		 *  сообщение 'Валидация не пройдена'.
+		 * @param re Переменная, в которую передается шаблон валидации.
+		 * @param data Переменная, в которую передается текст, введенный в поле.
+		 */
+		function RegExp(re, data) {
+			console.log(data.value);
+			if(re.test(data.value)) {		} else {
+				data.setAttribute('style','border-color: red');
+				alert('Валидация не пройдена');
+			}
+
+		}
+
+		RegExp(nameRE, $name);
+		RegExp(telRE, $tel);
+		RegExp(mailRE, $mail);
+		RegExp(textRE, $text);
+
+	});
+
+</script>
+</html>
